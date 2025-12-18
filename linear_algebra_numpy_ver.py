@@ -8,3 +8,10 @@ Insert a quick word on Numpy here:
 """
 
 import numpy as np
+
+foo = np.array([[1,2],[3,4]])
+bar = np.array([[1,2],[3,4]])
+
+print(foo.ndim)
+print(foo.shape)
+print(foo @ bar)
