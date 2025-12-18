@@ -102,7 +102,7 @@ B = [[1,2],
 
 # Print the shape of the matrix by using len(A) and len(A[0])
 
-print(f"Shape: {len(A)}, {len(A[0])}")
+# print(f"Shape: {len(A)}, {len(A[0])}")
 
 # Going against mathmatical convention in the naming of rows and columns
 # usually start with one but because python is zero indexing we start at 0
