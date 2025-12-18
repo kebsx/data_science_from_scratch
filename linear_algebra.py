@@ -76,3 +76,18 @@ def magnitude(v: Vector) -> float:
     return math.sqrt(sum_of_squares(v))   # math.sqrt is square root function
 
 assert magnitude([3, 4]) == 5
+
+# We have now have all the tools to compute the distance between two vectors
+
+# def squared_distance(v: Vector, w: Vector) -> float:
+#     """Computes (v_1 - w_1) ** 2 + ... + (v_n - w_n) ** 2"""
+#     return sum_of_squares(subtract(v, w))
+
+# def distance(v: Vector, w: Vector) -> float:
+#     """Computes the distance between v and w"""
+#     return math.sqrt(squared_distance(v, w))
+
+# Can also write the distance function as 
+def distance(v: Vector, w: Vector) -> float:
+    return magnitude(subtract(v, w))
+
