@@ -91,3 +91,57 @@ assert magnitude([3, 4]) == 5
 def distance(v: Vector, w: Vector) -> float:
     return magnitude(subtract(v, w))
 
+#Another type alias
+Matrix = List[List[float]]
+
+A = [[1,2,3],
+     [3,4,5]]
+B = [[1,2],
+     [3,4],
+     [5,6]]
+
+# Print the shape of the matrix by using len(A) and len(A[0])
+
+print(f"Shape: {len(A)}, {len(A[0])}")
+
+# Going against mathmatical convention in the naming of rows and columns
+# usually start with one but because python is zero indexing we start at 0
+
+from typing import Tuple
+
+def shape(A: Matrix) -> Tuple:
+    """Returns (# of rows, # of columns)"""
+    num_rows = len(A)
+    num_columns = len(A[0]) # number of elements in first row
+    return num_rows, num_columns
+
+assert shape(A) == (2, 3)
+
+def get_row(A: Matrix, j: int) -> Vector:
+    """Retuns the i-th row of A (as a Vector)"""
+    return [A_i[j]          # jth element of row A_i
+            for A_i in A]   # for each row A_i
+
+from typing import Callable
+
+def make_matrix(num_rows: int,
+                num_columns: int,
+                entry_fn: Callable[[int, int], float]) -> Matrix:
+    """
+    Returns a num_rows x num_cols matrix
+    whose (i,j)-th entry is entry_fn(i, j)
+    """
+
+    return [[entry_fn(i, j)                 # given i create a list
+             for j in range(num_columns)]   # [entry_fn(i, 0), ...]
+             for i in range(num_rows)]      # create one list for each i
+
+def identity_matrix(n: int) -> Matrix:
+    """Returns a n x n identity matrix"""
+    return make_matrix(n, n, lambda i, j: 1 if i == j else 0)
+
+assert identity_matrix(5) == [[1, 0, 0, 0, 0],
+                              [0, 1, 0, 0, 0],
+                              [0, 0, 1, 0, 0],
+                              [0, 0, 0, 1, 0],
+                              [0, 0, 0, 0, 1]]
