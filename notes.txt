@@ -1,0 +1,23 @@
+# Baye's Theorem
+### Example
+
+P(Has Disease) = 1/10000 = 0.0001, P(Does Not Have Disease) = 0.9999
+P(True Postive) = 0.99, P(False Postive) = 0.01
+
+P(D | T) (You have the diesease conditional on a postive test) = P(T|D)P(D)/[P(T|D)P(D) + P(T|NOT D)P(NOT D)]
+=> 0.99(0.001)/[0.99(0.001) + 0.01(0.999)] = 0.0098 or 0.98% chance of having the diesease with a postive test
+
+# Random Variables
+- A random variable is avariable whose possible values have associated prob dist
+- Somtimes talk about the expected value of a random variable
+- Can be conditioned like with other Variables
+    - Exmaple is with the two children, If x is the random variable reprsenting the number of girls
+    - x = 0 with a prob of 1/4
+    - x = 1 with a prob of 1/2
+    - x = 2 with a prob of 1/4
+    - We can the define a variable Y that repersents the number of girls with condition of one of the children being a girls
+    - Y = 1 with a prob of 2/3
+    - Y = 2 with a prob of 1/3
+    - Z would equeal a variable where the condition is that the oldest child is a girl
+    - Z = 1 with a prob of 1/2
+    - Z = 2 with a prob of 1/2
