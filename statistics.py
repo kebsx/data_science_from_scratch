@@ -13,7 +13,7 @@ plt.title("Histogram of Friend Counts")
 plt.xlabel("# of friends")
 plt.ylabel("# of people")
 # plt.show()
-plt.savefig("images/Histogram_friend_counts.png")
+# plt.savefig("images/Histogram_friend_counts.png")
 
 # This is hard to include in out hypthetical elevator pitch so let's generate
 # some other stats
@@ -174,7 +174,7 @@ plt.ylabel("minutes per day")
 plt.axis([0,100,0,100])
 # plt.show()
 
-plt.savefig("images/correlation_with_outlier.png")
+# plt.savefig("images/correlation_with_outlier.png")
 plt.gca().clear()
 
 plt.scatter(num_friends_good, daily_minutes_good)
@@ -183,4 +183,4 @@ plt.xlabel("# of friends")
 plt.ylabel("minutes per day")
 plt.axis([0,50,0,100])
 # plt.show()
-plt.savefig("images/correaltion_without_outlier.png")
+# plt.savefig("images/correaltion_without_outlier.png")
