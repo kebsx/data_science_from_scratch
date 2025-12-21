@@ -13,6 +13,13 @@ from probability import normal_cdf
 normal_probability_below = normal_cdf
 
 # It's above the threshold if it's not below the threshold
+def normal_probability_above(lo: float,
+                             mu: float=0,
+                             sigma: float=1) -> float:
+    """The probability that N(mu, sigma) is greater than lo."""
+    return 1 - normal_cdf(lo, mu, sigma)
+
+# It's between if it's less than hi, but not less than lo
 def normal_probability_between(lo: float,
                                hi: float,
                                mu: float=0,
@@ -79,3 +86,34 @@ hi = normal_upper_bound(0.5, mu_0, sigma_0)
 
 type_2_probability = normal_probability_below(hi, mu_1, sigma_1)
 power = 1 - type_2_probability          # 0.936
+
+def two_sided_p_value(x: float, mu: float=0, sigma: float=1) -> float:
+    """
+    How likely are we to see a value at least as extreme as x (in either
+    direction) if our values are from an N(mu, sigma)
+    """
+    if x >= mu:
+        # x is greater than the mean, so the tail is everything greater than x
+        return 2 * normal_probability_above(x, mu, sigma)
+    else:
+        # x is less than the mean, so the tail is everything less than x
+        return 2 * normal_probability_below(x, mu, sigma)
+    
+# If we were to see 530 heads we would compute
+two_sided_p_value(529.5, mu_0, sigma_0)
+
+#Can run this experiment to prove this to ourselves
+import random
+
+extreme_value_count = 0
+for _ in range(1000):
+    num_heads = sum(1 if random.random() < 0.5 else 0       # Count # of heads
+                    for _ in range(1000))                   # in 1000 flips
+    if num_heads >= 530 or num_heads <= 470:                # and count how often
+        extreme_value_count += 1                            # the # is 'extreme'
+
+# p-value was 0.062 => ~62 extreme values out of 1000
+assert 59 < extreme_value_count < 68, f"{extreme_value_count}"
+
+# if we instead saw 532 heads the p-value would be
+two_sided_p_value(531.5, mu_0, sigma_0)         # 0.0463
