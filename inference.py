@@ -125,3 +125,45 @@ upper_p_value(524.5, mu_0, sigma_0) # 0.061
 upper_p_value(526.5, mu_0, sigma_0) # 0.047
 
 # Confidence Intervals
+
+# Example we do 1000 flips of a coin and get 525 heads out of 1000 flips
+# we can estimate that are p = 0.525, but how confident are we in that value
+# CLT tells that the average of the bernoulli variables should be approx
+# normal, with mean p and std = math.sqrt(p * (1 - p) / 1000)
+# However we don't know p so we use our p_hat of 0.525
+
+p_hat = 525 / 1000
+mu = p_hat
+sigma = math.sqrt(p_hat * (1 - p_hat) / 1000)       # 0.0158
+
+normal_two_sided_bounds(0.95, mu, sigma)        # [0.4940, 0.5560]
+
+# if we had instead seen 540 heads
+p_hat = 540 / 1000
+mu = p_hat
+sigma = math.sqrt(p_hat * (1 - p_hat) / 1000)
+
+normal_two_sided_bounds(0.95, mu, sigma)        # [0.5091, 0.5709]
+
+# With this p_hat value we see that p = 0.5 or are fair coin hypthesis doesn't
+# lie within the confidence interval so we can conclude that the coin is biased
+
+# P-Hacking
+from typing import List
+
+def run_experiment() -> List[bool]:
+    """Flips a fair coin 1000 times, True = Heads, False = Tails"""
+    return [random.random() < 0.5 for _ in range(1000)]
+
+def reject_fairness(experiment: List[bool]) -> bool:
+    """Using 5% significance levels"""
+    num_heads = len([flip for flip in experiment if flip])
+    return num_heads < 469 or num_heads > 531
+
+random.seed(0)
+experiments = [run_experiment() for _ in range(1000)]
+num_rejections = len([experiment
+                     for experiment in experiments
+                     if reject_fairness(experiment)])
+
+assert num_rejections == 46
