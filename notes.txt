@@ -36,3 +36,27 @@ H1 -> P != 0.5
 We test by fliiping the coin n times and count the number of heads X
 This means that each trial or X is a Binomial(n, p) variable and we can approximate
 using the normal dist
+
+
+# Textbooks
+
+### Probability
+- Intro to Probability by Charles M. Grinstead and J Laurie Snell
+- scipy.stats documentation
+
+### Statistics
+- Introductory Statistics by Douglas Shafe and Zhiyi Zhang
+- OnlineStatBook
+- Intro Statistics by OpenStax
+
+### Linear Algebra
+- Linear Algebra by Jim Hefferon
+- Linear Algebra by David Cheney, Tom Denton, Rohit Thomas, Andrew Waldron
+- Linear Algebra Done Wrong
+
+### Visualiztion of data
+- Matplotlib Gallery
+- Seaborn
+- Altair
+- D3.js
+- Bokeh
