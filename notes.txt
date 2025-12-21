@@ -21,3 +21,18 @@ P(D | T) (You have the diesease conditional on a postive test) = P(T|D)P(D)/[P(T
     - Z would equeal a variable where the condition is that the oldest child is a girl
     - Z = 1 with a prob of 1/2
     - Z = 2 with a prob of 1/2
+
+# Hypothesis and Inference
+We translate hypotheses into stats about data we can then think of these stats as
+observations that of random variables from known dists
+In our classical setup we have a null hypothesis reprsenting some default position
+and alternative that we are trying to prove, we use stats to decide if we can
+reject the null postion 
+
+### Example
+We have a coin, we are going to assume that out null hypothesis is that the coin
+is fair so we have H0 -> p=0.5, out H1 would be that the coin isn't fair so
+H1 -> P != 0.5
+We test by fliiping the coin n times and count the number of heads X
+This means that each trial or X is a Binomial(n, p) variable and we can approximate
+using the normal dist
