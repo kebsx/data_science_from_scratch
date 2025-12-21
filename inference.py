@@ -167,3 +167,44 @@ num_rejections = len([experiment
                      if reject_fairness(experiment)])
 
 assert num_rejections == 46
+
+# Example A/B testing
+
+def estimated_parameters(N: int, n: int) -> Tuple[float, float]:
+    p = n / N
+    sigma = math.sqrt(p * (1 - p) / N)
+    return p, sigma
+
+def a_b_test_statistic(N_A: int, n_A: int, N_B: int, n_B: int) -> float:
+    p_A, sigma_A = estimated_parameters(N_A, n_A)
+    p_B, sigma_B = estimated_parameters(N_B, n_B)
+    return (p_B - p_A) / math.sqrt(sigma_A ** 2 + sigma_B ** 2)
+
+z = a_b_test_statistic(1000, 200, 1000, 180)        # -1.14
+two_sided_p_value(z)                                # 0.254
+
+# This is saying that their is about a 25% percent chance we would see this 
+# if the means were actually equal we can't reject the null based on this
+
+z = a_b_test_statistic(1000, 200, 1000, 150)        # -2.94
+two_sided_p_value(z)                                # 0.003
+
+# Saying that there is a 0.3% chance we see this difference if it the means
+# were actually the same, we can reject the null with this
+
+#Bayesian Inference
+
+# We choose a prior distrubtion from a beta dist and then use obseved data to
+# update that dist, if we used our coin as an example we would choose a dist 
+# that reprsents whether we think the coin is biased, fair, or we think nothing
+# at all then after gathering data we would update that dist, after some tedious
+# math we get that the update would simply be alpha + heads, beta + tails
+
+def B(alpha: float, beta: float) -> float:
+    """A normalizing constant so that the probability is 1"""
+    return math.gamma(alpha) * math.gamma(beta) / math.gamma(alpha + beta)
+
+def beta_pdf(x: float, alpha: float, beta: float) -> float:
+    if x <= 0 or x >= 1:
+         return 0
+    return x ** (alpha - 1) * (1 - x) ** (beta - 1) / B(alpha, beta)
