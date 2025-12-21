@@ -117,3 +117,11 @@ assert 59 < extreme_value_count < 68, f"{extreme_value_count}"
 
 # if we instead saw 532 heads the p-value would be
 two_sided_p_value(531.5, mu_0, sigma_0)         # 0.0463
+
+upper_p_value = normal_probability_above
+lower_p_value = normal_probability_below
+
+upper_p_value(524.5, mu_0, sigma_0) # 0.061
+upper_p_value(526.5, mu_0, sigma_0) # 0.047
+
+# Confidence Intervals
